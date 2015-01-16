@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Connecting markers with a line</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js"></script>
+  <link href="https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css" rel="stylesheet" />
+  <link href="style.css" rel="stylesheet" />
+
+  <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; width:100%; }
+  </style>
+
+  <script src="node_modules/angular/angular.js"></script>
+  <script src="js/papaparse.js"></script>
+  <script src="js/birdstories.js"></script>
+
+</head>
+<body ng-app="birdstories">
+
+<div id="map"></div>
+
+
+<article id="narrative">
+  <div class="sections prose" ng-controller="SectionsCtrl as sectionsCtrl">
+
+    <section id="cover" class="cover active">
+      <h2>The Adventure of a honey buzzard from Blötberget</h2>
+      <small class="quiet">Crank &#x25BE;</small>
+    </section>
+
+    <section id="point{{entry.ID}}" style="{{entry.BoxStyle}}" ng-repeat="entry in sectionsCtrl.entries">
+      <h3>{{entry.TitleSwedish}}</h3>
+      <div ng-if="entry.Image"><p><img ng-src="{{entry.Image}}" alt="" /></p></div>
+      <p>{{entry.TextSwedish}}</p>
+    </section>
+
+    <section id='end'> 
+     
+    </section>
+
+
+<!--
+
+    <section id='one' style="left:60vw">
+      <h3>The egg is hatched</h3>
+      <p><img src="images/hb_egg.png" alt="" /></p>
+      <p>November 1895. London is shrouded in fog and Sherlock Holmes and Watson pass time restlessly awaiting a new case. "The London criminal is certainly a dull fellow," Sherlock bemoans. "There have been numerous petty thefts," Watson offers in response. Just then a telegram arrives from Sherlock's brother Mycroft with a mysterious case.</p>
+    </section>
+    <section id='two' style="left:20vw">
+      <h3>The journey begins</h3>
+      <p>Arthur Cadogan West was found dead, head crushed in on train tracks at Aldgate Station at 6AM Tuesday morning. West worked at Woolwich Arsenal on the Bruce-Partington submarine, a secret military project. Plans for the submarine had been stolen and seven of the ten missing papers were found in West's possession. Mycroft implores Sherlock to take the case and recover the three missing papers.</p>
+    </section>
+    <section id='three' style="left:10vw">
+      <h3>Falsterbo</h3>
+      <p>Holmes and Watson's investigations take them across London. Sherlock deduces that West was murdered elsewhere, then moved to Aldgate Station to create the illusion that he was crushed on the tracks by a train. On their way to Woolwich Sherlock dispatches a telegram to Mycroft at London Bridge: "Send list of all foreign spies known to be in England, with full address."</p>
+    </section>
+    <section id='four' style="left:70vw">
+      <h3>Flying over Italy</h3>
+      <p>While investigating at Woolwich Arsenal Sherlock learns that West did not have the three keys&mdash;door, office, and safe&mdash;necessary to steal the papers. The train station clerk mentions seeing an agitated West boarding the 8:15 train to London Bridge. Sherlock suspects West of following someone who had access to the Woolwich chief's keyring with all three keys.</p>
+    </section>
+    <section id='five' style="left:70vw">
+      <h3>Dangerous Malta</h3>
+      <p>Mycroft responds to Sherlock's telegram and mentions several spies. Hugo Oberstein of 13 Caulfield Gardens catches Sherlock's eye. He heads to the nearby Gloucester Road station to investigate and learns that the windows of Caulfield Gardens open over rail tracks where trains stop frequently.</p>
+    </section>
+    <section id='six' style="left:70vw;">
+      <h3>Entering Africa</h3>
+      <p>Holmes deduces that the murderer placed West atop a stopped train at Caulfield Gardens. The train traveled to Aldgate Station before West's body finally toppled off. Backtracking to the criminal's apartment, Holmes finds a series of classified ads from <em>The Daily Telegraph</em> stashed away. All are under the name Pierrot: "Monday night after nine. Two taps. Only ourselves. Do not be so suspicious. Payment in hard cash when goods delivered."</p>
+    </section>
+    <section id='seven'>
+      <h3>Final destination</h3>
+      <p>Holmes and Watson head to The Daily Telegraph and place an ad to draw out the criminal. It reads: "To-night. Same hour. Same place. Two taps. Most vitally important. Your own safety at stake. Pierrot." The trap works and Holmes catches the criminal: Colonel Valentine Walter, the brother of Woolwich Arsenal's chief. He confesses to working for Hugo Oberstein to obtain the submarine plans in order to pay off his debts.</p>
+    </section>
+    <section id='end'> 
+      <p>Holmes and Watson head to The Daily Telegraph and place an ad to draw out the criminal. It reads: "To-night.</p>
+    </section>
+
+  -->
+  </div>
+</article>
+
+<script>
+
+</script>
+</body>
+</html>
