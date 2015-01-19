@@ -160,7 +160,7 @@
           // We iterate backwards here so that we find the topmost one.
           for (var i = sections.length - 1; i >= 0; i--) {
               var rect = sections[i].getBoundingClientRect();
-              if (rect.top >= 0 && rect.top <= narrativeHeight) {
+              if (rect.top >= 200 && rect.top <= (narrativeHeight+200)) {  /* This works, but SS+MT don't know why. We added 200 to make sections turn active before the previous has finished scrolling to the top */
                   newId = sections[i].id;
               }
           };

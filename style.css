@@ -56,6 +56,9 @@ body {
 
 h3 {
 margin:0 0 1ex 0;
+font-weight:bold;
+text-transform:uppercase;
+
 }
 
 article {
@@ -71,8 +74,8 @@ article {
   }
 
 .sections {
-  padding-top: 35vh;
-  padding-bottom:35vh;
+  padding-top: 45vh;
+  padding-bottom:100vh;
   /*background:rgba(0,0,0,0.75);*/
   width:360px;
   }
@@ -86,8 +89,8 @@ section {
           transition:color 500ms;text-shadow:100ms;
           transition:opacity 2000ms;
 
-  background-color: rgba(0,0,0,0.5);
-  opacity: 0;
+  background-color: rgba(0,0,0,0);
+  opacity: 0.25;
   position: relative;
 }
 section p, section h2, section img {
@@ -105,7 +108,7 @@ section p {
 section.active {
   color:rgba(255,255,255,1.0);
   text-shadow: 0px 0px 0px rgba(255,255,255,0.5);
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.75);
     transition:background-color 500ms;
   opacity: 1;
 }
@@ -120,7 +123,6 @@ section.active img {
  width: 100vw;
  height:25vh;
  padding:10vh 0 10vh 0;
- background-color: rgba(0,0,0,0.75);
 }
 #end.active{
  opacity: 0;

@@ -1,3 +1,25 @@
 ID,TitleSwedish,TextSwedish,Image,Latitude,Longitude,Zoom,LayoutOffset,BoxStyle,WIP!
-1,I boet ruvar bivråksparet tre ägg,Bivråksparet har lagt tre ägg,images/hb_egg.png,15.053327,60.125433,11,,left:60vw,
-2,Äggen kläcks,"Watson pass time restlessly awaiting a new case. ""The London criminal is certainly a dull fellow,"" Sherlock bemoans. ""There have been numerous petty thefts,"" Watson offers in response. Just then a telegram arrives from Sherlock's brother Mycroft with a mysterious case again.",,20.053327,50.125433,13,,left:20vw,
+1,I boet ruvar bivråksparet tre ägg,"Bivråksparet har lagt tre ägg.
+
+I allmänhet lägger bivråkar mellan ett och tre ägg i april. Bivråkarna turas om att ruva äggen.",images/hb_egg.png,15.053327,60.125433,11,,left:60vw,
+2,Äggen kläcks,"Nu har äggen kläckts. Två av ungarna överlevde: en hane och en hona.
+
+Nu är det bråda tider för föräldrarna. De måste hitta föda till sig själv och sina hungriga ungar.",,13.952636,58.676937,12,,left:20vw,
+3,Föräldrarna jagar jordgetingar,"Föräldrarna letar upp jordgetingbon, gräver fram vaxkakorna med de feta larvern och släpar hem dem till de hungriga barnen.",,15.054,60.124,1,,left:10vw,
+4,Ungfåglarna lär sig flyga,Nu sträcker de unga fåglarna på vingarna och efter lite övning kastar de sig ut i luften.,,15.055,60.123,16,,left:70vw,
+5,Hösten kommer - det är dags att börja flytta,"Nu börjar det bli kallt och getingarna tar slut. 
+
+Bivråken är väldigt specialiserad och är dålig på att jaga annan föda. Därför måste de ge sig av till andra, varmare trakter.
+
+Ungfåglarna är de första som ger sig av söderut. Föräldrarna stannar kvar ytterligare några veckor",,15.056,60.122,16,,left:10vw,
+6,Bivråkarna flyttar genom Sverige,Bivråkar undviker i det längsta att flyga över hav och andra större vatten. De letar efter kortast och säkrast möjliga sätt att ta sig över.,,12.833333,55.383333,6,,left:20vw,
+7,Öresund och Östersjön är i vägen,För att komma vidare på sin långa resa måste fåglarna ta sig över Öresund eller Östersjön. De letar efter den kortaste sträckan. Falsterbonäset verkar bra.,,12.833333,55.383333,9,,left:60vw,
+8,Bivråkarna samlas på falsterbonäset,"Ungfåglarna samlas på falsterbonäset.
+
+Här inväntar de rätt vindar och väder för en trygg och energi-effektiv färd till Danmark.
+
+Bivråkar är termikflygare. Det betyder att de kan utnyttja varma uppåtstigande vindar för att nå en hög höjd och därifrån utan större ansträngning glidflyga långa sträckor.
+
+Om inte rätt förutsättningar infinner sig, måste de flytta genom att flaxa aktivt med vingarna. Då slösar de med sin energireserv - som de kommer att behöva på sin långa resa till Afrika.",,12.833333,55.383333,12,,left:20vw,
+9,Bivråkarna skruvar över Ljungen,"Plötsligt är väderförhållande rätt: Vinden ligger i nordöstan och solen steker Ljungen och skapar varma uppvindar. Bivråkarna får luft under vingarna och ""skruvar"" i stora spiralformade grupper allt högre upp. När de nått tillräckligt högt upp kastar de sig ut i en glidflykt över havet mot Danmark.",,12.8877,55.4017,14,,left:70vw,
+10,Terra Firma på Møns klint,Efter en lyckad glidflykt över det läskiga havet kan bivråkarna landa i trygghet på Møns klint,,12.4097,54.9908,10,,left:70vw,
