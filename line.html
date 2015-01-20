@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Connecting markers with a line</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css' rel='stylesheet' />
+<script src="js/skrollr.min.js"></script>
+<script src="js/arc.js"></script>
+<link href="line.css" rel='stylesheet' />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div id='map'></div>
+
+<script>
+ L.mapbox.accessToken = 'pk.eyJ1IjoidG9zaGtpIiwiYSI6IkhnbG04NVkifQ.-KMIPyJnuh78Rtw9_jkp2g';
+ var map = L.mapbox.map('map', 'toshki.kobn7gkf',{zoomControl: false});
+ 
+ (function ($, L, skrollr) {
+  // coords of the start and the end of panning: [latitude, longitude]
+  //var startCoords = [40.7127, -74.0059]; // New York City
+  //var endCoords = [51.507222, -0.1275]; // London
+
+  //var coordinates = [ [60.125433,15.053327], [16.804541,8.964843], [16.29905,-8.613281] ]; // array of coordinates
+  var coordinates = [ [60.125433,15.053327], [-15.201421,24.124784], [16.29905,-8.613281] ]; // array of coordinates
+
+  // number of coords between startCoords and endCoords that can be panned to
+  var numCoords = 123;
+
+  // where to start and stop panning (pixels from the top of the document)
+  var mapWrap = $('#map');
+  
+  //var startPanTop = mapWrap.offset().top - 200;
+  var startPanTop = mapWrap.offset().top;
+  var endPanTop = startPanTop + 400; // experiment with this number 
+  
+  // Mapbox zoom level
+  var zoom = 5;
+
+  // set the height of the map for the sake of the example to better see the
+  // animation; note this height doesn't changed when the window gets resized
+  //mapWrap.height($(window).height() - 100);
+
+  var nextPath = true;
+ // var breakCheck1=false;
+  for (i=0; i<coordinates.length-1; i++) {
+    startCoords = [
+      coordinates[i][0], // use 2d array of coordinates
+      coordinates[i][1]
+    ];
+    for (j=1; j<coordinates.length; j++){
+        endCoords = [
+          coordinates[j][0],
+          coordinates[j][1]
+        ];
+        nextPath=false;
+        break;
+    }
+    if (nextPath==false) {break;}
+  } 
+  
+  // calculate great circle coords
+  var latLngs = (function (startCoords, endCoords, numCoords) {
+    // convert the coord arrays to the format of arc.js: x is longitude and y is
+    // latitude
+    
+    startCoords = {
+      'x': startCoords[1],
+      'y': startCoords[0]
+    };
+    endCoords = {
+      'x': endCoords[1],
+      'y': endCoords[0]
+    };
+    
+    // use arc.js to calculate coords for the great circle path between the two
+    // given coords:
+    // 1. create great circle
+    var generator = new arc.GreatCircle(startCoords, endCoords);
+    // 2. generate a line arc
+    var line = generator.Arc(numCoords);
+    // 3. get coords in the line arc
+    var coords = line.geometries[0].coords;
+
+    // convert the arc.js coords to L.LatLng objects
+    return coords.map(function (coord) {
+      return L.latLng(coord[1], coord[0]);
+    });
+  }(startCoords, endCoords, numCoords));
+
+  // center the map on the starting coords
+  map.setView(startCoords, zoom);
+
+  // disable dragging and zooming
+  map.dragging.disable();
+  map.touchZoom.disable();
+  map.doubleClickZoom.disable();
+  map.scrollWheelZoom.disable();
+
+  // disable the tap handler, if present
+  if (map.tap) {
+    map.tap.disable();
+  }
+
+  // add a polyline to the map, which will appear as the flight path
+  var polyline = L.polyline([startCoords], {
+    'color': '#f00'
+  }).addTo(map); 
+
+  // setup skrollr
+  skrollr.init({
+    'render': (function () {
+      // for the given scroll position, return the corresponding index of the
+      // latLngs array
+      var topToLatLngIndex = (function (startPanTop, endPanTop, numCoords) {
+        // helper function to map values between two arrays, from
+        // http://rosettacode.org/wiki/Map_range#JavaScript
+        var mapRange = function(from, to, s) {
+          return to[0] + (s - from[0]) * (to[1] - to[0]) / (from[1] - from[0]);
+        };
+
+        var topRange = [startPanTop, endPanTop];
+        var latLngIndexRange = [0, numCoords - 1];
+
+        return function (top) {
+          return Math.floor(mapRange(topRange, latLngIndexRange, top));
+        }; 
+      }(startPanTop, endPanTop, numCoords));
+
+      return function (data) {
+        // optional index of the latLngs array; if set, pan to the corresponding
+        // latLng
+        var latLngIndex = null;
+
+        if (data.curTop <= startPanTop &&
+            map.getCenter().distanceTo(latLngs[0]) > 10000) {
+          // when above the top scroll position, make sure the map pans to the
+          // start latLng (and doesn't get stuck elsewhere)
+          latLngIndex = 0;
+        } else if (data.curTop > startPanTop && data.curTop < endPanTop) {
+          // standard case
+          latLngIndex = topToLatLngIndex(data.curTop);
+        } else if (data.curTop >= endPanTop &&
+            map.getCenter().distanceTo(latLngs[numCoords - 1]) > 10000) {
+          // when below the bottom scroll position, make sure the map pans to
+          // the end latLng
+          latLngIndex = numCoords - 1;
+        }
+
+        if (latLngIndex !== null) {
+          // reset the polyline to contain only the latLngs up to the current
+          // index; in other words, redraw the red line
+          polyline.setLatLngs(latLngs.slice(0, latLngIndex + 1));
+
+          // pan the map to the new latLng
+          map.panTo(latLngs[latLngIndex], {
+            'animate': false
+          });
+        } 
+      };
+    }())
+  });
+}(jQuery, L, skrollr)); 
+</script>
+</body>
+</html>
